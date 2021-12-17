@@ -12,6 +12,7 @@ class Button extends React.Component {
 
         this.onBtnClick = this.onBtnClick.bind(this);
         this.onDelete = this.onDelete.bind(this);
+        this.counter = this.counter.bind(this);
     }
 
     async onBtnClick() {
@@ -46,6 +47,16 @@ class Button extends React.Component {
         }
     }
 
+    counter() {
+        if (this.state.count !== 0) {
+            return this.state.count;
+        } else if (isNaN(parseFloat(this.props.counter)) === true) {
+            return 0;
+        } else {
+            return this.props.counter;
+        }
+    }
+
     render() {
         return (
             <div>
@@ -55,13 +66,7 @@ class Button extends React.Component {
                 <button onClick={this.onDelete} className="Button-style">
                     {this.props.delete}
                 </button>
-                <h2>
-                    {this.state.count !== 0
-                        ? this.state.count
-                        : isNaN(parseFloat(this.props.counter)) === true
-                        ? 0
-                        : this.props.counter}
-                </h2>
+                <h2>{this.counter()}</h2>
             </div>
         );
     }
